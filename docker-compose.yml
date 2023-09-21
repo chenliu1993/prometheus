@@ -11,7 +11,7 @@ networks:
 services:
 
   prometheus:
-    image: prom/prometheus:v2.36.2
+    image: prom/prometheus:v2.47.0
     volumes:
       - ./prometheus/:/etc/prometheus/
       - prometheus_data:/prometheus
@@ -38,7 +38,7 @@ services:
 #          - node.hostname == ${HOSTNAME}
 
   node-exporter:
-    image: quay.io/prometheus/node-exporter:latest
+    image: bitnami/node-exporter:1.6.1-debian-11-r61
     volumes:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
@@ -59,7 +59,7 @@ services:
       mode: global
 
   alertmanager:
-    image: prom/alertmanager
+    image: prom/alertmanager:v0.26.0
     ports:
       - 9093:9093
     volumes:
@@ -90,7 +90,7 @@ services:
       mode: global
 
   grafana:
-    image: grafana/grafana
+    image: grafana/grafana:10.1.2
     user: "472"
     depends_on:
       - prometheus
@@ -115,3 +115,4 @@ services:
 #      - "9091:9091"
 #    networks:
 #      - back-tier
+
